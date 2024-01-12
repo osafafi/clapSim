@@ -5,6 +5,7 @@ import { CameraManager } from "./CameraManager";
 import { SimulationManager } from "./SimulationManager";
 import { UiManager } from "./UiManager";
 import { LabelManager } from "./LabelManager";
+import { AudioManager } from "./AudioManager";
 
 export class Director extends THREE.Object3D {
   scene: THREE.Scene;
@@ -16,6 +17,7 @@ export class Director extends THREE.Object3D {
   simulationManager: SimulationManager;
   uiManager: UiManager;
   labelManager: LabelManager;
+  audioManager: AudioManager;
 
   constructor(scene: THREE.Scene) {
     super();
@@ -25,8 +27,9 @@ export class Director extends THREE.Object3D {
     this.renderingClock = new THREE.Clock();
 
     // Managers
-    this.objectManager = new ObjectManager(this);
     this.cameraManager = new CameraManager(this);
+    this.audioManager = new AudioManager(this);
+    this.objectManager = new ObjectManager(this);
     this.simulationManager = new SimulationManager(this);
     this.uiManager = new UiManager(this);
     this.labelManager = new LabelManager(this);

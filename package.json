@@ -27,6 +27,11 @@
   "devDependencies": {
     "@types/dat.gui": "^0.7.12",
     "@types/three": "^0.160.0",
+    "parcel-plugin-static-files-copy": "^2.6.0",
     "typescript": "^5.3.3"
+  },
+  "staticFiles": {
+    "staticPath": "public",
+    "watcherGlob": "**"
   }
 }

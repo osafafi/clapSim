@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { Director } from "./Director";
+import { Person } from "./ObjectManager";
 
 export class SimulationManager extends THREE.Object3D {
   director: Director;
@@ -22,6 +23,8 @@ export class SimulationManager extends THREE.Object3D {
   };
   stop = () => {
     this.simulationState = "stop";
+    const p = this.director.objectManager.crowd.children[0] as Person;
+    p.sound?.play();
   };
 
   simulate(elapsedTime: number) {

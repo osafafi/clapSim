@@ -20,7 +20,7 @@ export class ObjectManager extends THREE.Object3D {
   }
 
   init() {
-    this.createCrowd(10);
+    this.createCrowd(50);
     this.director.scene.add(this.crowd);
 
     //Grid
@@ -75,9 +75,9 @@ export class ObjectManager extends THREE.Object3D {
 
   createCrowd(count: number) {
     for (let i = 0; i < count; i++) {
-      const person = new Person(10);
+      const person = new Person(count / 2);
+      person.addSound(this.director.audioManager.createClapSound(person.cps));
       this.crowd.add(person);
-      // this.createPerson();
     }
     this.findNeighbors();
   }
@@ -120,7 +120,13 @@ export class ObjectManager extends THREE.Object3D {
       // const time = (Date.now() * cps) % 1000;
       // // Check if the material is of a type that includes the 'color' property
       if (individual.indicator.material instanceof THREE.MeshStandardMaterial) {
-        individual.indicator.material.color.set(!res ? 0x808080 : 0xff0000);
+        if (res) {
+          individual.indicator.material.color.set(0x808080);
+          individual.sound?.play();
+        } else {
+          individual.indicator.material.color.set(0xff0000);
+        }
+        // individual.indicator.material.color.set(!res ? 0x808080 : 0xff0000);
       }
 
       if (individual.neighbor) {
@@ -175,15 +181,17 @@ function generateRandomePosition(bounds: number) {
   return position;
 }
 
-class Person extends THREE.Object3D {
+export class Person extends THREE.Object3D {
   cps: number;
   label: CSS2DObject;
   indicator: THREE.Mesh;
   neighbor: null | Person;
+  sound: THREE.PositionalAudio | null;
 
   constructor(bounds: number) {
     super();
     this.neighbor = null;
+    this.sound = null;
 
     // Body Geo
     const rand = generateRandomAttributes();
@@ -225,6 +233,14 @@ class Person extends THREE.Object3D {
   }
 
   init() {}
+
+  addSound(sound: THREE.PositionalAudio) {
+    if (this.sound) {
+      this.remove(this.sound);
+    }
+    this.add(sound);
+    this.sound = sound;
+  }
 
   resetCps() {
     const rand = generateRandomAttributes();
