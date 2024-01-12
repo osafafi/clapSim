@@ -1,0 +1,32 @@
+{
+  "name": "clapsim",
+  "version": "1.0.0",
+  "description": "clappy clap",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel public/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/osafafi/clapSim.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/osafafi/clapSim/issues"
+  },
+  "homepage": "https://github.com/osafafi/clapSim#readme",
+  "dependencies": {
+    "camera-controls": "^2.7.3",
+    "dat.gui": "^0.7.9",
+    "gsap": "^3.12.4",
+    "stats.js": "^0.17.0",
+    "three": "^0.160.0"
+  },
+  "devDependencies": {
+    "@types/dat.gui": "^0.7.12",
+    "@types/three": "^0.160.0",
+    "typescript": "^5.3.3"
+  }
+}
